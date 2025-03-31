@@ -13,7 +13,6 @@ import (
 	"database/sql/driver"
 	"fmt"
 	"net"
-	"os"
 	"strconv"
 	"strings"
 )
@@ -27,19 +26,19 @@ func encodeConnectionAttributes(cfg *Config) string {
 	connAttrsBuf := make([]byte, 0)
 
 	// default connection attributes
-	connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrClientName)
-	connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrClientNameValue)
-	connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrOS)
-	connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrOSValue)
-	connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrPlatform)
-	connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrPlatformValue)
-	connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrPid)
-	connAttrsBuf = appendLengthEncodedString(connAttrsBuf, strconv.Itoa(os.Getpid()))
-	serverHost, _, _ := net.SplitHostPort(cfg.Addr)
-	if serverHost != "" {
-		connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrServerHost)
-		connAttrsBuf = appendLengthEncodedString(connAttrsBuf, serverHost)
-	}
+	// connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrClientName)
+	// connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrClientNameValue)
+	// connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrOS)
+	// connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrOSValue)
+	// connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrPlatform)
+	// connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrPlatformValue)
+	// connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrPid)
+	// connAttrsBuf = appendLengthEncodedString(connAttrsBuf, strconv.Itoa(os.Getpid()))
+	// serverHost, _, _ := net.SplitHostPort(cfg.Addr)
+	// if serverHost != "" {
+	// 	connAttrsBuf = appendLengthEncodedString(connAttrsBuf, connAttrServerHost)
+	// 	connAttrsBuf = appendLengthEncodedString(connAttrsBuf, serverHost)
+	// }
 
 	// user-defined connection attributes
 	for _, connAttr := range strings.Split(cfg.ConnectionAttributes, ",") {
